@@ -1,1 +1,79 @@
-/* You can add global styles to this file, and also import other style files */
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+
+$grey-primary: mat.define-palette(mat.$grey-palette, 700, 500, 900); // Darker grey tones for primary
+$black-color: #333333; // Dark grey/black for headers and key elements
+$dirty-white: #dcdcdc; // Dirty white for body and background
+
+// Define custom typography using grey, black, and dirty white
+$my-typography: mat.define-typography-config(
+  (
+    font-family: 'Roboto', sans-serif,
+    h1: mat.typography-h1(
+      font-size: 36px,
+      font-weight: 300,
+      color: $black-color
+    ),
+    h2: mat.typography-h2(
+      font-size: 32px,
+      font-weight: 400,
+      color: $black-color
+    ),
+    h3: mat.typography-h3(
+      font-size: 28px,
+      font-weight: 500,
+      color: #4f4f4f // Medium grey for subheaders
+    ),
+    h4: mat.typography-h4(
+      font-size: 24px,
+      font-weight: 500,
+      color: #6e6e6e // Lighter grey for smaller headers
+    ),
+    h5: mat.typography-h5(
+      font-size: 20px,
+      font-weight: 400,
+      color: #757575 // Light grey for more subtle headers
+    ),
+    body: mat.typography-body(
+      font-size: 16px,
+      color: $dirty-white // Dirty white for body text
+    ),
+    button: mat.typography-button(
+      font-size: 14px,
+      font-weight: 500,
+      color: #ffffff // White text on buttons
+    )
+  )
+);
+
+// Set the theme
+html {
+  @include mat.theme((
+    color: (
+      theme-type: light,
+      primary: $grey-primary,
+      tertiary: mat.$blue-palette, // Optionally keep accent color
+    ),
+    typography: $my-typography, // Use custom typography
+    density: 0,
+  ));
+}
+
+// Global styles
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: 'Roboto', "Helvetica Neue", sans-serif;
+  background-color: $dirty-white; // Set dirty white background
+  color: #4f4f4f; // Medium grey for text color
+}
+
+.mat-button {
+  background-color: $black-color; // Dark grey/black for button background
+  color: #ffffff; // White text on buttons
+}
+
+.mat-button:hover {
+  background-color: #4f4f4f; // Lighter grey for hover state
+}
